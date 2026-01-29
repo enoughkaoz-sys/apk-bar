@@ -1,0 +1,15 @@
+{
+  "name": "APK Builder (Node20 + Java17)",
+  "image": "mcr.microsoft.com/devcontainers/javascript-node:20",
+  "features": {
+    "ghcr.io/devcontainers/features/java:1": { "version": "17" }
+  },
+  "postCreateCommand": "sudo apt-get update && sudo apt-get install -y unzip zip wget curl git && npm i",
+  "customizations": {
+    "vscode": {
+      "settings": {
+        "terminal.integrated.defaultProfile.linux": "bash"
+      }
+    }
+  }
+}
