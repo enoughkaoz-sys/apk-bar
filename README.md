@@ -1,0 +1,2 @@
+# apk-bar
+Aplicativo operacional
