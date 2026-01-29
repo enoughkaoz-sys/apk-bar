@@ -1,0 +1,9 @@
+{
+  "appId": "com.seubar.barflow",
+  "appName": "Bar Flow",
+  "webDir": "www",
+  "server": {
+    "url": "https://id-preview-de0bab9f--bd82f2c0-e274-41cc-9237-2d031ad8ebc5.lovable.app",
+    "cleartext": false
+  }
+}
