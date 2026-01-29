@@ -1,0 +1,48 @@
+name: Build Android APK
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Setup Java 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 17
+
+      - name: Setup Android SDK
+        uses: android-actions/setup-android@v3
+
+      - name: Build APK (Gradle)
+        run: |
+          set -e
+          if [ -f android/gradlew ]; then
+            cd android
+          elif [ -f barflow-capacitor/android/gradlew ]; then
+            cd barflow-capacitor/android
+          elif [ -f gradlew ]; then
+            :
+          else
+            echo "❌ Não achei gradlew. Rode: find . -maxdepth 4 -name gradlew"
+            exit 1
+          fi
+          chmod +x gradlew
+          ./gradlew clean assembleDebug
+
+      - name: Upload APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: app-debug-apk
+          path: |
+            **/app/build/outputs/apk/debug/*.apk
